@@ -1,0 +1,84 @@
+﻿@model Antivaly.BusinessModel.EditProduct
+
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<center>
+
+    <h2><b style="font-family:Cambria">Dashboard</b></h2>
+</center>
+<form action="/Seller/EditProduct" method="post">
+    <div style="
+        width: auto;
+        height: 30px;
+        background-color: #522d5b;
+        border-radius: 5px;
+    "><center><p style="font-family: Cambria;color:aliceblue;padding-top: 2.5px;font-size: 15px"><b>Listed Products</b></p></center></div>
+    <table class="table table-bordered" style="font-family:Cambria">
+
+        <tr>
+            <th>Product Name</th>
+            <th>Category</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Action</th>
+        </tr>
+        @foreach (var item in ViewBag.Products)
+        {
+            if (item.PID == ViewBag.Product)
+            {
+                <tr>
+                    <td hidden="hidden"><input autocomplete="off" class="form-control valid" data-val="true" value="@item.PID" id="PID" name="PID" type="number" style="width: 75px"></td>
+                    <td><input autocomplete="off" class="form-control valid" data-val="true" value="@item.PName" id="PName" name="PName" placeholder="Name" type="text"></td>
+                    <td>@item.CatName</td>
+                    <td><input autocomplete="off" class="form-control valid" data-val="true" value="@item.Qty" id="Qty" name="Qty" placeholder="Quantity" type="number" style="width: 75px"></td>
+                    <td><input autocomplete="off" class="form-control valid" data-val="true" value="@item.Price" id="Price" name="Price" placeholder="Price" type="number" style="width: 100px"></td>
+                    <td><input autocomplete="off" class="form-control valid" data-val="true" value="@item.Descr" id="Descr" name="Descr" placeholder="Description" type="text" style="width: 350px"></td>
+                    <td>
+
+
+                        <div class="form-group" hidden="hidden">
+                            <input autocomplete="off" class="form-control valid" data-val="true" value="@item.PID" id="@item.PID" name="" type="text" />
+                        </div>
+                        <input type="submit" class="btn btn-success" style="inline-size: 80px" name="@item.PID" value="Save" onmouseover="assignPID(this)" onmouseout="removePID(this)">
+
+                        <a href="/Seller/Dashboard" class="btn btn-danger" style="inline-size: 80px">Discard</a>
+                    </td>
+                </tr>
+            }
+            else if (item.UID == ViewBag.UID)
+            {
+                <tr>
+                    <td>@item.PName</td>
+                    <td>@item.CatName</td>
+                    <td>@item.Qty</td>
+                    <td>@item.Price</td>
+                    <td>@item.Descr</td>
+                    <td>
+                        <a href="/Seller/EditProduct/@item.PID" class="btn btn-primary" style="inline-size: 80px">Edit</a>
+
+                        <div class="form-group" hidden="hidden">
+                            <input autocomplete="off" class="form-control valid" data-val="true" value="@item.PID" id="@item.PID" name="" type="text" />
+                        </div>
+                        
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>
+
+</form>
+
+
+<script>
+    function assignPID(x) {
+        document.getElementById(x.name).name = "PID";
+    }
+
+    function removePID(x) {
+        document.getElementById(x.name).name = "";
+    }
+</script>

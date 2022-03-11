@@ -1,0 +1,58 @@
+﻿@model Antivaly.BusinessModel.PostProduct
+
+<div class="jumbotron">
+    <center>
+        <h2 style="font-family:Cambria;"><b>Post Product</b></h2>
+        <hr style="border: 1px solid grey" />
+        <form action="/Seller/PostProduct" method="post">
+
+            <div class="form-group">
+                <label for="CatName">Choose A Category &nbsp; </label>
+                <select class="panel" name="CatName" id="CatName" value="">
+                    <option selected>Select</option>
+                    @foreach (var item in ViewBag.Category)
+                    {
+                        <option value="@item.CatName">@item.CatName</option>
+                    }
+                </select>
+
+            </div>
+
+            <div class="form-group" hidden="hidden">
+                <input autocomplete="off" class="form-control valid" data-val="true" value="@Session["UID"].ToString()" id="UID" name="UID" placeholder="UID" type="text" readonly /> <label>Use this ID to login</label>
+                <span class="field-validation-valid text-danger" data-valmsg-for="UID" data-valmsg-replace="true"></span>
+            </div>
+
+            <div class="form-group">
+                <input autocomplete="off" class="form-control valid" data-val="true" value="" id="PName" name="PName" placeholder="Name" type="text">
+                <span class="field-validation-valid text-danger" data-valmsg-for="PName" data-valmsg-replace="true"></span>
+                @Html.ValidationMessageFor(m => m.PName, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                <input autocomplete="off" class="form-control valid" data-val="true" value="" id="Qty" name="Qty" placeholder="Quantity" type="number">
+                <span class="field-validation-valid text-danger" data-valmsg-for="Qty" data-valmsg-replace="true"></span>
+                @Html.ValidationMessageFor(m => m.Qty, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                <input autocomplete="off" class="form-control valid" data-val="true" value="" id="Price" name="Price" placeholder="Price" type="number">
+                <span class="field-validation-valid text-danger" data-valmsg-for="PName" data-valmsg-replace="true"></span>
+                @Html.ValidationMessageFor(m => m.Price, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                <textarea class="form-control valid" data-val="true" value="" id="Descr" name="Descr" placeholder="Description" rows="3" cols="50"></textarea>
+                <span class="field-validation-valid text-danger" data-valmsg-for="Descr" data-valmsg-replace="true"></span>
+                @Html.ValidationMessageFor(m => m.Descr, "", new { @class = "text-danger" })
+            </div>
+
+
+            <div style="inline-size: 150px">
+                <input type="submit" class="btn btn-block btn-primary" value="Post">
+            </div>
+
+        </form>
+    </center>
+
+</div>
